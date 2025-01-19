@@ -31,7 +31,7 @@ use App\Models\Anuncio_administrador;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('login');
 });
 
 

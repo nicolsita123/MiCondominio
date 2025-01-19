@@ -13,11 +13,13 @@ class ResidenteController extends Controller
     public function vista(Request $request)
     {
         $texto=trim($request->get('texto'));
-        $registros=DB::table('Residente')->select('ID_RESIDENTE', 'NUM_RUT', 'DV_RUT', 'NOM_RESIDENTE', 'SEG_NOMBRE_RESIDENTE', 'APELLIDO_PA', 'APELLIDO_MA', 'FECHA_NACIMIENTO', 'CORREO_RESIDENTE', 'CONTRASENA_RESIDENTE', 'DIRECCION', 'ID_CONDOMINIO', 'ID_CUENTA')
-        ->WHERE('NOM_RESIDENTE', 'LIKE', '%'.$texto.'%')
-        ->orwhere('NUM_RUT', 'LIKE', '%'.$texto.'%', 'ASC')
+        $registros = DB::table('Residente')
+        ->select('ID_RESIDENTE', 'NUM_RUT', 'DV_RUT', 'NOM_RESIDENTE', 'SEG_NOMBRE_RESIDENTE', 'APELLIDO_PA', 'APELLIDO_MA', 'FECHA_NACIMIENTO', 'CORREO_RESIDENTE', 'CONTRASENA_RESIDENTE', 'DIRECCION', 'ID_CONDOMINIO', 'ID_CUENTA')
+        ->where('NOM_RESIDENTE', 'LIKE', '%'.$texto.'%')
+        ->orWhere('NUM_RUT', 'LIKE', '%'.$texto.'%')
         ->orderBy('ID_RESIDENTE', 'ASC')
         ->paginate(15);
+
 
         return view('residente', compact('registros', 'texto'));
         

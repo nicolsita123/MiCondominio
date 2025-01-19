@@ -65,12 +65,14 @@
                 </div>
                 <div class="form-group">
                     <label for="HORA_INICIO">HORA_INICIO</label>
-                    <input type="time" class="form-control" name="HORA_INICIO" required maxlength="70">
+                    <input type="time" name="HORA_INICIO" value="{{ old('HORA_INICIO') }}">
+
                 </div>
 
                 <div class="form-group">
                     <label for="HORA_TERMINO">HORA_TERMINO</label>
-                    <input type="time" class="form-control" name="HORA_TERMINO" required maxlength="70">
+                    <input type="time" name="HORA_TERMINO" value="{{ old('HORA_TERMINO') }}">
+
                 </div>
                 
 <!-- ID RESIDENTE PERO PARA QUE SE MUESTRE EL NOMBREE JIJI -->
@@ -101,44 +103,52 @@
 <!-- ID SERVICIOOOO -->
 
 
-                <div class="form-group">
-                <label for="ID_SERVICIO">Nombre servicio</label>
-                <select class="form-control" name="ID_SERVICIO" required>
+<div class="form-group">
+    <label for="ID_SERVICIO">Nombre servicio</label>
+    <select class="form-control" name="ID_SERVICIO" id="ID_SERVICIO" required onchange="calcularTotal()">
+        <?php
+        use App\Models\Servicio;
+        $registros = Servicio::all();
 
-                    <?php
+        foreach ($registros as $registro) {
+            $id = $registro->ID_SERVICIO;
+            $nombre = $registro->DESCRIPCION;
+            $monto = $registro->MONTO_SERVICIO; // Obtener el monto del servicio
+            echo "<option value=\"$id\" data-monto=\"$monto\">$nombre</option>";
+        }
+        ?>
+    </select>
+</div>
 
-                    use App\Models\Servicio;
-                    $registros = Servicio::all();
+<div class="form-group">
+    <label for="monto_servicio">Monto del servicio</label>
+    <input type="text" class="form-control" id="monto_servicio" name="monto_servicio" readonly>
+</div>
 
-                    foreach ($registros as $registro) {
-                    $id = $registro->ID_SERVICIO;
-                    $nombre = $registro->DESCRIPCION;
-                    echo "<option value=\"$id\">$nombre</option>";
-                    }
-                    ?>
-                    </select>
-                </div>
+<div class="form-group">
+    <label for="ID_ESPACIO">Nombre espacio comun</label>
+    <select class="form-control" name="ID_ESPACIO" id="ID_ESPACIO" required onchange="calcularTotal()">
+        <?php
+        use App\Models\Espacio_comun;
 
-<!--ID ESPACIOOOOOOOO -->
+        $registros = Espacio_comun::all();
 
-                <div class="form-group">
-                <label for="ID_ESPACIO">Nombre espacio comun</label>
-                <select class="form-control" name="ID_ESPACIO" required>
+        foreach ($registros as $registro) {
+            $id = $registro->ID_ESPACIO;
+            $nombre = $registro->DESCRIPCION;
+            $montoarriendo = $registro->MONTO_ARRIENDO;
+            echo "<option value=\"$id\" data-montoarriendo=\"$montoarriendo\">$nombre</option>";
+        }
+        ?>
+    </select>
+</div>
 
-                    <?php
+<div class="form-group">
+    <label for="monto_arriendo">Monto del arriendo</label>
+    <input type="text" class="form-control" id="monto_arriendo" name="monto_arriendo" readonly>
+</div>
 
-                    use App\Models\Espacio_comun;
 
-                    $registros = Espacio_comun::all();
-
-                    foreach ($registros as $registro) {
-                    $id = $registro->ID_ESPACIO;
-                    $nombre = $registro->DESCRIPCION;
-                    echo "<option value=\"$id\">$nombre</option>";
-                    }
-                    ?>
-                    </select>
-                </div>
 
 <!-- ID CONSERJE -->
 <!-- Conserje -->
@@ -166,6 +176,40 @@
         <option value="5" @if(isset($registro) && $registro->ID_ADMIN == 5) selected @endif>Salim Dikles</option>
     </select>
 </div>
+
+
+<div class="form-group">
+    <label for="total">Total</label>
+    <input type="text" class="form-control" id="total" name="total" readonly>
+</div>
+
+<script>
+    // Función para actualizar los montos y el total
+    function calcularTotal() {
+        // Obtener los valores seleccionados de los menús desplegables
+        const selectServicio = document.getElementById('ID_SERVICIO');
+        const montoServicio = parseFloat(selectServicio.options[selectServicio.selectedIndex].getAttribute('data-monto')) || 0;
+
+        const selectEspacio = document.getElementById('ID_ESPACIO');
+        const montoArriendo = parseFloat(selectEspacio.options[selectEspacio.selectedIndex].getAttribute('data-montoarriendo')) || 0;
+
+        // Actualizar los campos individuales
+        document.getElementById('monto_servicio').value = montoServicio.toFixed(2);
+        document.getElementById('monto_arriendo').value = montoArriendo.toFixed(2);
+
+        // Calcular y actualizar el total
+        const total = montoServicio + montoArriendo;
+        document.getElementById('total').value = total.toFixed(2);
+    }
+
+    // Inicializar los valores al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        calcularTotal();
+    });
+</script>
+
+
+
                 </div>
 
 
