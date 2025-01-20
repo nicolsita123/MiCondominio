@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for micondominio-1-twilight-morning-3530 on 2025-01-20T13:06:42-03:00
+# fly.toml app configuration file generated for micondominio-1-purple-sun-3355 on 2025-01-20T13:09:36-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'micondominio-1-twilight-morning-3530'
+app = 'micondominio-1-purple-sun-3355'
 primary_region = 'scl'
 console_command = 'php /var/www/html/artisan tinker'
 
