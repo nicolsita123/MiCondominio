@@ -1,0 +1,48 @@
+[submodule "vendor/brick/math"]
+	path = vendor/brick/math
+	url = https://github.com/brick/math.git
+
+[submodule "vendor/carbonphp/carbon-doctrine-types"]
+    path = vendor/carbonphp/carbon-doctrine-types
+    url = https://github.com/carbonphp/carbon-doctrine-types.git
+
+[submodule "vendor/dflydev/dot-access-data"]
+    path = vendor/dflydev/dot-access-data
+    url = https://github.com/dflydev/dot-access-data.git
+
+[submodule "vendor/doctrine/cache"]
+    path = vendor/doctrine/cache
+    url = https://github.com/doctrine/cache.git
+
+
+[submodule "vendor/doctrine/dbal"]
+    path = vendor/doctrine/dbal
+    url = https://github.com/doctrine/dbal.git
+
+[submodule "vendor/doctrine/deprecations"]
+    path = vendor/doctrine/deprecations
+    url = https://github.com/doctrine/deprecations.git
+
+[submodule "vendor/doctrine/event-manager"]
+    path = vendor/doctrine/event-manager
+    url = https://github.com/doctrine/event-manager.git
+
+[submodule "vendor/doctrine/inflector"]
+    path = vendor/doctrine/inflector
+    url = https://github.com/doctrine/inflector.git
+
+[submodule "vendor/doctrine/lexer"]
+    path = vendor/doctrine/lexer
+    url = https://github.com/doctrine/lexer.git
+
+[submodule "vendor/dragonmantank/cron-expression"]
+    path = vendor/dragonmantank/cron-expression
+    url = https://github.com/dragonmantank/cron-expression.git
+
+[submodule "vendor/egulias/email-validator"]
+    path = vendor/egulias/email-validator
+    url = https://github.com/egulias/email-validator.git
+
+[submodule "vendor/fakerphp/faker"]
+    path = vendor/fakerphp/faker
+    url = https://github.com/FakerPHP/Faker.git
